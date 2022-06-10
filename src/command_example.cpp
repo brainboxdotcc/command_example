@@ -17,7 +17,11 @@ using json = nlohmann::json;
 
 std::map<std::string, command_definition> commands = {
 	{ "ping", { "A ping command", handle_ping }},
-	{ "help", { "A help command", handle_help }},
+	{ "help", {
+		"A help command", handle_help , { 
+			{ dpp::command_option(dpp::co_string, "term", "Help term", false) },
+		}
+	}},
 	{ "info", { "An info command", handle_info }},
 };
 
@@ -35,12 +39,12 @@ int main()
 	bot.on_ready([&](const dpp::ready_t & event) {
 		std::vector<dpp::slashcommand> slash_commands;
 		for (auto & def : commands) {
-			slash_commands.push_back(
-				dpp::slashcommand().
-				set_name(def.first).
-				set_description(def.second.description).
-				set_application_id(bot.me.id)
-			);
+			dpp::slashcommand c;
+			c.set_name(def.first).set_description(def.second.description).set_application_id(bot.me.id);
+			for (auto & param : def.second.parameters) {
+				c.add_option(param);
+			}
+			slash_commands.push_back(c);
 		}
 		bot.global_bulk_command_create(slash_commands);
 	});

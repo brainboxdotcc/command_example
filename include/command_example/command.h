@@ -6,4 +6,5 @@ using command_function = std::function<void(dpp::cluster&, const dpp::slashcomma
 struct command_definition {
 	std::string description;
 	command_function function;
+	std::vector<dpp::command_option> parameters = {};
 };

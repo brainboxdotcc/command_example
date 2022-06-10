@@ -2,6 +2,15 @@
 #include "command_example/commands/help.h"
 
 void handle_help(dpp::cluster& bot, const dpp::slashcommand_t& event) {
+	auto parameter = event.get_parameter("term");
+	if (std::holds_alternative<std::string>(parameter)) {
+		std::string search_term = std::get<std::string>(parameter);
+		if (search_term == "ping") {
+			event.reply("This help left useless as an exercise for the developer.");
+		} else {
+			event.reply("This message intentionally left blank. 🤪");
+		}
+	}
 	event.reply(
 		dpp::message().add_embed(
 			dpp::embed().
