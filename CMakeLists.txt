@@ -20,6 +20,10 @@ set_target_properties(${BOT_NAME} PROPERTIES
 set(THREADS_PREFER_PTHREAD_FLAG TRUE)
 find_package(Threads REQUIRED)
 find_package(DPP REQUIRED)
+
+find_package(fmt)
+target_link_libraries(${BOT_NAME} fmt::fmt)
+
 if(APPLE)
 	set(OPENSSL_ROOT_DIR /usr/local/opt/openssl)
 	find_package(OpenSSL REQUIRED)
