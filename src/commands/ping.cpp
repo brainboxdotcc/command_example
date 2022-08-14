@@ -1,6 +1,6 @@
 #include "command_example/command.h"
 #include "command_example/commands/ping.h"
-#include <dpp/fmt/format.h>
+#include <fmt/format.h>
 
 /* Example ping command
  * Calculates rest + websocket ping
