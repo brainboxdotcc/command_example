@@ -1,6 +1,6 @@
 #include "command_example/command.h"
 #include "command_example/commands/info.h"
-#include <dpp/fmt/format.h>
+#include <fmt/format.h>
 
 /* Example info command
  */
